@@ -4,10 +4,10 @@ pub fn run() {
     const FILE_PATH: &str = "inputs/elf_with_most_calories_01_12_2022.txt";
     match fs::read_to_string(FILE_PATH) {
         Ok(content) => {
-            let (max, elf_num) = compute_max_calories(content.clone());
+            let (max, elf_num) = compute_max_calories(&content);
             println!("------------------------------------");
             println!("elf {elf_num} has max cals of {max}cals");
-            let sum_of_max_3 = get_sum_of_max_3_calories(content);
+            let sum_of_max_3 = get_sum_of_max_3_calories(&content);
             println!("------------------------------------");
             println!("Sum of max 3 cals is {sum_of_max_3}");
         }
@@ -17,7 +17,7 @@ pub fn run() {
     }
 }
 
-fn compute_max_calories(content: String) -> (u32, usize) {
+fn compute_max_calories(content: &String) -> (u32, usize) {
     let mut max = 0;
     let mut total_calories = 0;
     let mut elf_num = 1;
@@ -38,7 +38,7 @@ fn compute_max_calories(content: String) -> (u32, usize) {
     return (max, max_elf_num);
 }
 
-fn get_sum_of_max_3_calories(content: String) -> u32 {
+fn get_sum_of_max_3_calories(content: &String) -> u32 {
     let mut total_calories: Vec<u32> = Vec::new();
     let mut elf_cals = 0;
     for line in content.lines() {
