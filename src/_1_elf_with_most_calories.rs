@@ -1,20 +1,11 @@
-use std::fs;
+use crate::utils;
 
 pub fn run() {
-    const FILE_PATH: &str = "inputs/elf_with_most_calories_01_12_2022.txt";
-    match fs::read_to_string(FILE_PATH) {
-        Ok(content) => {
-            let (max, elf_num) = compute_max_calories(&content);
-            println!("------------------------------------");
-            println!("elf {elf_num} has max cals of {max}cals");
-            let sum_of_max_3 = get_sum_of_max_3_calories(&content);
-            println!("------------------------------------");
-            println!("Sum of max 3 cals is {sum_of_max_3}");
-        }
-        Err(e) => {
-            println!("{e}");
-        }
-    }
+    let content = utils::file::read_input_file("_1_elf_with_most_calories.txt");
+    let (max, elf_num) = compute_max_calories(&content);
+    println!("1.1 -- elf {elf_num} has max cals of {max}");
+    let sum_of_max_3 = get_sum_of_max_3_calories(&content);
+    println!("1.2 -- Sum of max 3 cals is {sum_of_max_3}");
 }
 
 fn compute_max_calories(content: &String) -> (u32, usize) {
